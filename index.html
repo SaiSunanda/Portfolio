@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunanda Vempati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F4F7; --surface:#FFFFFF; --ink:#121826; --muted:#586174; --line:#DADEE7;
+  --accent:#2F55D9; --accent-soft:#E4EAFD; --code-bg:#0F1522; --code-ink:#D8DEEC; --code-dim:#7C879C; --code-key:#8FA8FF; --code-str:#F0B866;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C111B; --surface:#141B28; --ink:#E7EAF2; --muted:#98A2B6; --line:#253044;
+    --accent:#86A0FF; --accent-soft:#1B2645; --code-bg:#070B13; --code-ink:#D8DEEC; --code-dim:#6C778C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C111B; --surface:#141B28; --ink:#E7EAF2; --muted:#98A2B6; --line:#253044;
+  --accent:#86A0FF; --accent-soft:#1B2645; --code-bg:#070B13; --code-ink:#D8DEEC; --code-dim:#6C778C;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:24px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+.label{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.mark{font:700 17px var(--display);color:var(--ink);text-decoration:none}
+.mark span{color:var(--accent)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+nav ul a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+nav ul a:hover{color:var(--ink)}
+@media (max-width:720px){nav ul{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-block:72px 64px}
+@media (max-width:880px){.hero{grid-template-columns:1fr;gap:36px;padding-block:48px}}
+.hero h1{font-size:clamp(44px,7vw,80px);font-weight:800;letter-spacing:-.03em}
+.role{margin-top:18px;font:500 clamp(17px,2vw,20px)/1.4 var(--body);color:var(--ink)}
+.role em{font-style:normal;color:var(--accent)}
+.lede{margin-top:16px;max-width:58ch;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:8px;font:600 14px var(--body);text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0C111B}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0C111B}}
+.btn:hover{border-color:var(--accent)}
+
+/* CREATE2 card */
+.derive{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:22px;font:13px/1.7 var(--mono);box-shadow:0 20px 50px -24px rgba(15,21,34,.55);overflow-x:auto}
+.derive .c{color:var(--code-dim)}
+.derive .k{color:var(--code-key)}
+.derive .s{color:var(--code-str)}
+.chains{margin-top:16px;border-top:1px dashed #2A3346;padding-top:14px;display:grid;gap:6px}
+.chain{display:flex;justify-content:space-between;gap:12px;white-space:nowrap}
+.chain span:last-child{color:var(--code-str)}
+.derive-note{margin-top:10px;font:12px var(--body);color:var(--muted)}
+
+/* sections */
+section{padding-block:64px;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr;gap:18px}}
+.sec-head h2{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.sec-head .label{display:block;margin-bottom:10px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--surface);padding:20px}
+.stat b{display:block;font:800 34px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:8px;font-size:13px;color:var(--muted)}
+.about p{margin:0 0 14px;max-width:66ch}
+
+/* expertise */
+.groups{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 36px}
+@media (max-width:640px){.groups{grid-template-columns:1fr}}
+.group h3{font:600 15px var(--body);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 13px var(--mono);padding:6px 10px;border-radius:6px;background:var(--accent-soft);color:var(--ink)}
+.chip.plain{background:transparent;border:1px solid var(--line);color:var(--muted)}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media (max-width:720px){.projects{grid-template-columns:1fr}}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.proj.feature{grid-column:1/-1;border-color:var(--accent)}
+.proj .label{color:var(--accent)}
+.proj h3{font-size:22px;font-weight:700;letter-spacing:-.01em}
+.proj ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:4px}
+.proj p{margin:0;color:var(--muted)}
+.proj .chips{margin-top:auto;padding-top:6px}
+
+/* timeline */
+.roles{display:grid;gap:0}
+.job{display:grid;grid-template-columns:170px 1fr;gap:28px;padding-block:26px;border-bottom:1px solid var(--line)}
+.job:first-child{padding-top:0}
+.job:last-child{border-bottom:0}
+@media (max-width:640px){.job{grid-template-columns:1fr;gap:8px}}
+.when{font:500 13px/1.5 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.when .now{display:inline-block;margin-top:6px;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);letter-spacing:.05em;text-transform:uppercase}
+.job h3{font-size:20px;font-weight:700}
+.job .org{color:var(--accent);font-weight:600;font-size:15px;margin-top:4px}
+.job ul{margin:12px 0 0;padding-left:18px;color:var(--muted);display:grid;gap:5px}
+
+/* education */
+.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:760px){.edu{grid-template-columns:1fr}}
+.edu div{padding-top:16px;border-top:2px solid var(--ink)}
+.edu h3{font:600 17px/1.35 var(--body)}
+.edu p{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+/* contact */
+.contact h2.big{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.03em;max-width:16ch}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px}
+@media (max-width:640px){.contact-grid{grid-template-columns:1fr}}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.row > div{min-width:0}
+.row .v{font:500 14px var(--mono);overflow-wrap:anywhere;user-select:all}
+.row .v a{color:var(--ink);text-decoration:none}
+.row .v a:hover{color:var(--accent)}
+.copy{flex:none;font:600 12px var(--body);padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.copy:hover{color:var(--ink);border-color:var(--accent)}
+footer{padding-block:28px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="mark" href="#top">SV<span>.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <div class="label">Senior Blockchain Engineer · Hyderabad, India</div>
+        <h1 style="margin-top:16px">Sunanda Vempati</h1>
+        <p class="role">Smart contract architect building <em>real-world-asset DeFi</em>, stablecoins and on-chain identity across EVM and Solana.</p>
+        <p class="lede">5+ years designing, deploying and auditing smart contracts — from real-estate-backed stablecoins to dynamic ERC-1155 NFTs and deterministic multi-chain token deployments.</p>
+        <div class="meta">
+          <span><b>Now</b> · Lead Blockchain Developer, G Future Tech</span>
+          <span><b>Also</b> · Smart Contract Manager, Maavatar</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn" href="https://github.com/SaiSunanda" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/Sunanda-Vempati" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div>
+        <div class="derive" aria-label="CREATE2 deterministic address formula">
+<span class="c">// one salt, one address, every chain</span><br>
+<span class="k">address</span> = keccak256(<br>
+&nbsp;&nbsp;<span class="s">0xff</span> ++ deployer<br>
+&nbsp;&nbsp;++ salt<br>
+&nbsp;&nbsp;++ keccak256(initCode)<br>
+)[<span class="s">12:</span>]
+          <div class="chains">
+            <div class="chain"><span>Ethereum · 1</span><span>0x…same address</span></div>
+            <div class="chain"><span>Polygon · 137</span><span>0x…same address</span></div>
+            <div class="chain"><span>BNB Chain · 56</span><span>0x…same address</span></div>
+            <div class="chain"><span>Arbitrum · 42161</span><span>0x…same address</span></div>
+          </div>
+        </div>
+        <p class="derive-note">The CREATE2 pattern behind the RBC / FRK multi-chain token rollouts — consistent contract addresses on every network. (Chains shown are illustrative.)</p>
+      </div>
+    </header>
+  </div>
+
+  <section id="about">
+    <div class="wrap sec-head">
+      <div><span class="label">About</span><h2>Building trust into code</h2></div>
+      <div class="about">
+        <p>I'm a blockchain engineer who specialises in the parts of Web3 where correctness matters most: stablecoins, real-world-asset tokenisation, and the contracts that hold other people's value. My work spans multi-chain token deployments, deterministic contract architecture with CREATE2, and compliance-ready token standards like ERC-3643.</p>
+        <p>Alongside building, I lead smart contract auditing and security validation — using Slither, MythX and Mythril — and integrate institutional custody and wallets including Fireblocks, MetaMask and Phantom.</p>
+        <div class="stats" style="margin-top:28px">
+          <div class="stat"><b>5+</b><span>years in blockchain engineering</span></div>
+          <div class="stat"><b>2</b><span>ecosystems — EVM &amp; Solana</span></div>
+          <div class="stat"><b>4</b><span>token standards shipped: ERC-20, 721, 1155, 3643</span></div>
+          <div class="stat"><b>3</b><span>audit toolchains: Slither, MythX, Mythril</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise">
+    <div class="wrap sec-head">
+      <div><span class="label">Expertise</span><h2>Core stack</h2></div>
+      <div class="groups">
+        <div class="group"><h3>Smart contracts</h3><div class="chips"><span class="chip">Solidity</span><span class="chip">Rust</span><span class="chip">CREATE2</span><span class="chip">Upgradeable contracts</span></div></div>
+        <div class="group"><h3>Chains &amp; architecture</h3><div class="chips"><span class="chip">EVM</span><span class="chip">Solana</span><span class="chip">Cross-chain bridging</span><span class="chip">Multi-sig</span></div></div>
+        <div class="group"><h3>DeFi &amp; RWA</h3><div class="chips"><span class="chip">Stablecoins</span><span class="chip">Lending / borrowing</span><span class="chip">Real-estate tokenisation</span><span class="chip">dApps</span></div></div>
+        <div class="group"><h3>Token standards</h3><div class="chips"><span class="chip">ERC-20</span><span class="chip">ERC-721</span><span class="chip">ERC-1155</span><span class="chip">ERC-3643</span></div></div>
+        <div class="group"><h3>Security &amp; auditing</h3><div class="chips"><span class="chip">Slither</span><span class="chip">MythX</span><span class="chip">Mythril</span></div></div>
+        <div class="group"><h3>Wallets &amp; custody</h3><div class="chips"><span class="chip">Fireblocks</span><span class="chip">MetaMask</span><span class="chip">Phantom</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:32px"><div><span class="label">Selected work</span><h2>Key projects</h2></div><div></div></div>
+      <div class="projects">
+        <article class="proj feature">
+          <span class="label">RWA · Stablecoin</span>
+          <h3>USDAO — RWA yield-bearing stablecoin</h3>
+          <ul>
+            <li>Designed the architecture for a real-estate-backed stablecoin</li>
+            <li>Implemented an overcollateralised lending and borrowing model</li>
+            <li>Integrated compliance-ready token standards (ERC-3643)</li>
+            <li>Built cross-chain-compatible DeFi infrastructure</li>
+          </ul>
+          <div class="chips"><span class="chip plain">Solidity</span><span class="chip plain">ERC-3643</span><span class="chip plain">Cross-chain</span></div>
+        </article>
+        <article class="proj">
+          <span class="label">Identity · NFTs</span>
+          <h3>Maavatar — on-chain AI digital identity</h3>
+          <ul>
+            <li>Developed ERC-1155 dynamic NFTs (dNFTs)</li>
+            <li>Designed contracts for AI-driven identity evolution</li>
+            <li>Enabled a secure on-chain ownership and interaction layer</li>
+          </ul>
+          <div class="chips"><span class="chip plain">ERC-1155</span><span class="chip plain">dNFT</span></div>
+        </article>
+        <article class="proj">
+          <span class="label">Infrastructure</span>
+          <h3>RBC / FRK — multi-chain token deployment</h3>
+          <ul>
+            <li>Deployed tokens across multiple EVM chains with CREATE2</li>
+            <li>Kept contract addresses consistent across networks</li>
+            <li>Automated deployment pipelines for scale</li>
+          </ul>
+          <div class="chips"><span class="chip plain">CREATE2</span><span class="chip plain">CI pipelines</span></div>
+        </article>
+        <article class="proj feature">
+          <span class="label">RWA · Tokenisation</span>
+          <h3>RealProton — real-world asset tokenisation</h3>
+          <p>Tokenisation platform bringing real-world assets on-chain, building on the same RWA and compliance-token foundations as USDAO.</p>
+          <div class="chips"><span class="chip plain">RWA</span><span class="chip plain">Tokenisation</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap sec-head">
+      <div><span class="label">Experience</span><h2>Where I've built</h2></div>
+      <div class="roles">
+        <div class="job">
+          <div class="when">Dec 2024 – Present<br><span class="now">Current</span></div>
+          <div>
+            <h3>Smart Contract Manager</h3>
+            <div class="org">Maavatar</div>
+            <ul>
+              <li>Designed and implemented on-chain identity and AI avatar infrastructure</li>
+              <li>Developed ERC-1155 dynamic NFTs with upgradeable metadata</li>
+              <li>Integrated DeFi, NFT and DAO interoperability</li>
+              <li>Ensured scalability and contract security across ecosystems</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Oct 2024 – Present<br><span class="now">Current</span></div>
+          <div>
+            <h3>Lead Blockchain Developer</h3>
+            <div class="org">G Future Tech Pvt. Ltd. · Ahmedabad</div>
+            <ul>
+              <li>Built an RWA-based real-estate stablecoin system across EVM chains</li>
+              <li>Implemented multi-sig wallet infrastructure and cross-chain flows</li>
+              <li>Integrated Fireblocks and multiple wallet providers</li>
+              <li>Led smart contract auditing and security validation</li>
+              <li>Designed and deployed multi-chain token infrastructure with deterministic CREATE2 addressing</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Aug 2022 – Nov 2024</div>
+          <div>
+            <h3>Blockchain Developer</h3>
+            <div class="org">Brane Enterprises</div>
+            <ul>
+              <li>Developed enterprise-grade smart contracts using the NSL framework</li>
+              <li>Automated contract generation and validation pipelines</li>
+              <li>Conducted audits with Slither, MythX and Mythril</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap sec-head">
+      <div><span class="label">Education</span><h2>Learning</h2></div>
+      <div class="edu">
+        <div><h3>PG Diploma in Software Development (Blockchain)</h3><p>IIIT Bangalore &amp; upGrad</p></div>
+        <div><h3>PG Diploma in Management</h3><p>IGNOU</p></div>
+        <div><h3>B.Sc. — Mathematics, Physics, Electronics</h3><p>Osmania University</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <span class="label">Contact</span>
+      <h2 class="big" style="margin-top:12px">Shipping a protocol? Let's talk.</h2>
+      <p class="lede">Open to senior smart-contract, DeFi and RWA roles, audits and architecture consulting.</p>
+      <div class="contact-grid">
+        <div class="row"><div><div class="label">Email</div><div class="v"><a href="mailto:Vempati.SaiSunanda@gmail.com">Vempati.SaiSunanda@gmail.com</a></div></div><button class="copy" id="copy-email" data-copy="Vempati.SaiSunanda@gmail.com">Copy</button></div>
+        <div class="row"><div><div class="label">Phone</div><div class="v">+91 77028 00803</div></div><button class="copy" id="copy-phone" data-copy="+917702800803">Copy</button></div>
+        <div class="row"><div><div class="label">GitHub</div><div class="v"><a href="https://github.com/SaiSunanda" target="_blank" rel="noopener">github.com/SaiSunanda</a></div></div><button class="copy" id="copy-gh" data-copy="https://github.com/SaiSunanda">Copy</button></div>
+        <div class="row"><div><div class="label">LinkedIn</div><div class="v"><a href="https://www.linkedin.com/in/Sunanda-Vempati" target="_blank" rel="noopener">linkedin.com/in/Sunanda-Vempati</a></div></div><button class="copy" id="copy-li" data-copy="https://www.linkedin.com/in/Sunanda-Vempati">Copy</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Sunanda Vempati</span><span>Hyderabad, India</span></div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
+    var fallback=function(){var v=b.parentNode.querySelector('.v');var r=document.createRange();r.selectNodeContents(v);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';setTimeout(function(){b.textContent='Copy'},1500)};
+    try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
+  });
+});
+</script>
+</body>
+</html>
