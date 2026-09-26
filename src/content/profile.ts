@@ -26,8 +26,8 @@ export const profile = {
   email: "Vempati.SaiSunanda@gmail.com",
   github: "https://github.com/SaiSunanda",
   githubLabel: "github.com/SaiSunanda",
-  linkedin: "https://www.linkedin.com/in/Sunanda-Vempati",
-  linkedinLabel: "linkedin.com/in/Sunanda-Vempati",
+  linkedin: "https://www.linkedin.com/in/sunanda-vempati/",
+  linkedinLabel: "linkedin.com/in/sunanda-vempati",
   resume: "/Sunanda_Vempati_Resume.pdf",
 } as const;
 
