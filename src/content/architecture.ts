@@ -84,7 +84,6 @@ export const blueprints: Blueprint[] = [
       "Interfaces other components can rely on as the ecosystem grows",
     ],
     seenIn: { label: "Maavatar", href: "/case-studies/maavatar" },
-    wide: true,
   },
 ];
 
@@ -92,6 +91,8 @@ export type Decision = {
   id: string;
   question: string;
   summary: string;
+  decision: string;
+  impact: string;
   featured?: boolean;
   context: string;
   considerations: string[];
@@ -102,6 +103,8 @@ export type Decision = {
 export const decisions: Decision[] = [
   {
     id: "create2",
+    decision: "Deploy through a CREATE2 factory with identical init code on every EVM network, moving chain-specific configuration into protected post-deploy initialisation.",
+    impact: "One verifiable token address across EVM networks, and releases that can be reproduced and checked before deployment.",
     summary: "Deterministic deployment gives one predictable address on every EVM network — easier to integrate, verify and trust.",
     featured: true,
     question: "Why CREATE2?",
@@ -119,6 +122,8 @@ export const decisions: Decision[] = [
   },
   {
     id: "erc3643",
+    decision: "Model regulated assets as ERC-3643 permissioned tokens: identity registry, claim topics, trusted issuers and a modular compliance contract, with tightly scoped agent roles.",
+    impact: "Transfer eligibility is enforced at protocol level, and compliance rules can evolve without redeploying the token.",
     summary: "Compliance-oriented tokenization: transfers only succeed between verified identities under modular transfer rules.",
     featured: true,
     question: "Why ERC-3643?",
@@ -136,6 +141,8 @@ export const decisions: Decision[] = [
   },
   {
     id: "erc1155",
+    decision: "Represent identities, NFT tiers and digital assets as ERC-1155 token classes, with metadata evolution restricted to permissioned paths.",
+    impact: "Many asset types in one contract, batch operations, and identities that evolve while ownership stays stable.",
     summary: "Flexible multi-token contracts for identities, tiers and dynamic digital assets in one place.",
     featured: true,
     question: "Why ERC-1155?",
@@ -153,9 +160,11 @@ export const decisions: Decision[] = [
   },
   {
     id: "layerzero",
+    decision: "Use a LayerZero OFT-oriented model with explicitly peered deployments instead of building a custom bridge.",
+    impact: "One logical supply across chains, with the cross-chain trust dependency made explicit and documented for stakeholders.",
     summary: "One logical token supply across networks, moved by messaging between trusted peers rather than wrapped copies.",
     featured: true,
-    question: "Why cross-chain architecture?",
+    question: "Why LayerZero / OFT?",
     context:
       "A token that lives on several chains needs a single, coherent supply rather than a set of unrelated wrapped copies.",
     considerations: [
@@ -170,6 +179,8 @@ export const decisions: Decision[] = [
   },
   {
     id: "fireblocks",
+    decision: "Hold privileged roles in policy-controlled Fireblocks vaults separated by responsibility — issuer, treasury, transfer vault, legal — with multisignature approvals.",
+    impact: "No single key can execute issuer, treasury or agent actions, and every privileged approval is auditable.",
     summary: "Institutional custody and policy-driven approvals for the most privileged asset operations.",
     featured: true,
     question: "Why Fireblocks?",
@@ -187,6 +198,8 @@ export const decisions: Decision[] = [
   },
   {
     id: "evm-solana",
+    decision: "Keep one product specification with chain-native implementations: CREATE2 and ERC-20 contracts on EVM, SPL tokens and program-derived addresses on Solana.",
+    impact: "Each chain follows its own execution and security model instead of a lowest-common-denominator port.",
     summary: "One product spec, two execution models — chain-appropriate implementations rather than forcing one chain's patterns onto the other.",
     featured: true,
     question: "EVM + Solana",
@@ -204,6 +217,8 @@ export const decisions: Decision[] = [
   },
   {
     id: "collateral-models",
+    decision: "Share infrastructure across crypto-backed and RWA-backed collateral while keeping risk parameters, pricing inputs and recovery paths per collateral type.",
+    impact: "Both models coexist without the volatile asset's rules governing the illiquid one, or vice versa.",
     summary: "Crypto and real-world collateral share infrastructure but need separate risk, pricing and liquidation rules.",
     question: "Crypto-backed vs RWA-backed models",
     context:
@@ -220,6 +235,8 @@ export const decisions: Decision[] = [
   },
   {
     id: "metaverse-architecture",
+    decision: "Put identity, ownership and key interactions on-chain; keep rendering, media and AI off-chain.",
+    impact: "Shared primitives the rest of the ecosystem can trust, without paying on-chain cost for everything.",
     summary: "Decide what the chain is the source of truth for — identity, ownership, interaction — and design everything around it.",
     question: "Blockchain-backed metaverse architecture",
     context:
@@ -266,33 +283,143 @@ export const securityPractices = [
   "Deployment verification",
 ];
 
-export const domains = [
+// Home: four architecture specializations. Items are the concerns each domain
+// has to answer — architecture vocabulary, not claims about a specific system.
+export const specializations = [
   {
     n: "01",
-    title: "RWA & Asset Tokenization",
-    flow: ["Asset", "Identity", "Compliance", "Registry", "Token", "Controlled Transfer", "Custody"],
-    body: "Blockchain infrastructure for tokenized real-world assets, compliance-oriented tokenization and controlled asset-transfer workflows.",
-    proof: { label: "RealProton · USDAO", href: "/case-studies/realproton" },
+    title: "RWA Architecture",
+    line: "Regulated assets where eligibility and transfer rules live in the protocol.",
+    items: ["Identity", "Claims", "Compliance", "ERC-3643", "Asset lifecycle", "Custody", "Controlled transfers"],
+    href: "/architecture#domains",
   },
   {
     n: "02",
-    title: "DeFi & Financial Protocols",
-    flow: ["Collateral", "Oracle", "Lending", "Borrowing", "Liquidity", "Liquidation", "Treasury"],
-    body: "Smart-contract infrastructure for stablecoins, lending, borrowing, staking, liquidity and risk-management mechanisms.",
-    proof: { label: "USDAO · REAL Governance", href: "/case-studies/usdao" },
+    title: "DeFi Architecture",
+    line: "Financial protocols designed around solvency under stress.",
+    items: ["Collateral", "Oracles", "Vaults", "Lending", "Liquidation", "Solvency", "Treasury controls"],
+    href: "/architecture#domains",
   },
   {
     n: "03",
     title: "Multi-chain Token Infrastructure",
-    flow: ["Token", "Deployment", "Vesting", "Staking", "Treasury", "Bridge", "Multi-chain"],
-    body: "Token infrastructure spanning deployment automation, lifecycle management, bridging and multi-network architecture.",
-    proof: { label: "RBC / FRK", href: "/case-studies/rbc-frk" },
+    line: "One token system across networks, with an explicit trust model.",
+    items: ["EVM", "Solana", "Deterministic deployment", "Cross-chain messaging", "Supply reconciliation", "Bridge controls", "Lifecycle management"],
+    href: "/architecture#cross-chain",
   },
   {
     n: "04",
-    title: "Blockchain-powered Metaverse",
-    flow: ["Identity", "Wallet", "Digital Assets", "NFTs", "Ownership", "On-chain Interaction"],
-    body: "Blockchain foundations for digital identity, NFT assets, ownership and Web3-enabled metaverse ecosystems.",
-    proof: { label: "Maavatar", href: "/case-studies/maavatar" },
+    title: "Smart Contract Architecture",
+    line: "Contract systems whose authority, upgrades and failure paths are designed up front.",
+    items: ["Access control", "Upgradeability", "Governance", "Security", "Role separation", "Testing", "Deployment automation"],
+    href: "/architecture#security",
   },
+];
+
+// Methodology shown at the top of the Architecture page.
+export const methodology = [
+  { step: "Requirements", note: "Business outcome, regulatory context, operators and users" },
+  { step: "Trust Model", note: "Who is trusted for what — keys, oracles, bridges, custodians, admins" },
+  { step: "Architecture", note: "Contract boundaries, token lifecycle, chains and upgrade model" },
+  { step: "Smart Contracts", note: "Implementation against agreed interfaces and invariants" },
+  { step: "Security Controls", note: "Role separation, privileged paths, pause and recovery" },
+  { step: "Integration", note: "Backend, APIs, wallets, custody and compliance services" },
+  { step: "Deployment", note: "Deterministic, scripted, verified on every network" },
+  { step: "Operations", note: "Runbooks, monitoring and controlled change after launch" },
+];
+
+export const principles = [
+  {
+    n: "01",
+    title: "A token is a system, not a contract.",
+    body: "Token architecture includes issuance, governance, custody, integrations, deployment, monitoring and operational controls.",
+  },
+  {
+    n: "02",
+    title: "Cross-chain architecture is trust architecture.",
+    body: "Every bridge introduces assumptions about messaging, liquidity, supply reconciliation and failure recovery.",
+  },
+  {
+    n: "03",
+    title: "Compliance belongs in architecture.",
+    body: "For regulated assets, identity, claims, transfer restrictions and administrative controls must exist at protocol level.",
+  },
+  {
+    n: "04",
+    title: "Security begins before the audit.",
+    body: "Threat modelling, role separation, privileged operations, upgrade controls and emergency mechanisms are architecture decisions.",
+  },
+  {
+    n: "05",
+    title: "Deployment is part of system design.",
+    body: "Deterministic deployment, environment consistency, verification and operational runbooks are production requirements.",
+  },
+  {
+    n: "06",
+    title: "Technology follows system constraints.",
+    body: "EVM, Solana, LayerZero and ERC-3643 are implementation choices — architecture begins with system requirements.",
+  },
+];
+
+// Security framework: how I reason about controls. Not a claim that every
+// control was implemented in a specific engagement.
+export const securityFramework = [
+  { group: "Authority", items: ["Access control", "Least privilege", "Role separation", "Multisig", "Timelocks", "Key management", "Custody"] },
+  { group: "Runtime controls", items: ["Pause controls", "Circuit breakers", "Rate limits", "Supply invariants"] },
+  { group: "External risk", items: ["Oracle risk", "Bridge risk", "Upgrade governance"] },
+  { group: "Assurance", items: ["Testing", "Static analysis — Slither, Mythril, MythX", "Audit readiness", "Monitoring"] },
+];
+
+export const threatModel = [
+  {
+    threat: "Compromised privileged key",
+    boundary: "Admin and issuer roles",
+    control: "Role separation, multisig or custody-held roles",
+    response: "Pause affected paths, rotate keys, reassign roles",
+  },
+  {
+    threat: "Forged or faulty cross-chain message",
+    boundary: "Bridge / messaging layer",
+    control: "Explicit peers, verifier configuration, rate limits",
+    response: "Halt the affected route, reconcile supply",
+  },
+  {
+    threat: "Stale or manipulated price",
+    boundary: "Oracle input",
+    control: "Freshness checks, conservative collateral ratios",
+    response: "Suspend risky actions until prices are trusted",
+  },
+  {
+    threat: "Unsafe upgrade",
+    boundary: "Upgrade authority",
+    control: "Governed upgrades, review and timelock",
+    response: "Delay window allows detection and rollback",
+  },
+];
+
+export const crossChain = {
+  diagram: [
+    ["Ethereum", "Polygon", "Arbitrum", "Base", "Avalanche"],
+    "Cross-chain Messaging / OFT",
+    "Unified Token System",
+    "Solana · chain-native SPL implementation",
+  ] as (string | string[])[],
+  label:
+    "Reference cross-chain architecture: EVM networks connected through cross-chain messaging to one unified token system, with Solana as a chain-native implementation.",
+  questions: [
+    "Who attests that an event on the source chain happened — and what does the destination do if that attestation is wrong?",
+    "Where does canonical supply live: burn-and-mint across peers, or lock-and-release behind an adapter?",
+    "Which remote contracts may send messages, and how is that peer list governed?",
+    "What stops a faulty route from draining value — rate limits, pause paths, reconciliation checks?",
+  ],
+};
+
+export const deploymentFlow = [
+  { step: "Environment configuration", note: "Per-network parameters kept out of init code" },
+  { step: "Deterministic deployment", note: "CREATE2 for identical addresses across EVM networks" },
+  { step: "Scripted rollout", note: "The same automated steps on every network" },
+  { step: "Post-deploy validation", note: "Addresses, roles, peers and parameters checked" },
+  { step: "Source verification", note: "Verified on each network's explorer" },
+  { step: "Role handover", note: "Privileged roles moved to multisig or custody-held wallets" },
+  { step: "Audit handoff & runbooks", note: "Scope, assumptions and operational procedures documented" },
 ];

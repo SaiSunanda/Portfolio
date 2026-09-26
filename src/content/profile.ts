@@ -4,17 +4,18 @@
 export const profile = {
   name: "Sunanda Vempati",
   location: "Hyderabad, India",
-  roles: ["Blockchain Architect", "Smart Contract Architect", "Web3 Technical Lead"],
+  roles: ["Blockchain Architect", "Web3 Technical Lead"],
+  specialization: ["RWA", "DeFi", "Multi-chain Token Infrastructure", "Smart Contract Architecture"],
   specialisms: ["Blockchain Consultant", "Smart Contract SME", "RWA", "DeFi", "Multi-chain", "Metaverse"],
   focus: ["RWA", "DeFi", "Token Infrastructure", "Cross-Chain", "EVM", "Solana"],
   headline:
-    "Designing secure blockchain systems across RWA, DeFi, token infrastructure, cross-chain protocols and blockchain-powered ecosystems.",
+    "Token architecture, smart contracts, cross-chain infrastructure, governance, compliance, custody integration and production deployment — designed as one system, from requirements to operations.",
   credibility: [
-    { k: "15+", v: "Years IT experience" },
+    { k: "15+", v: "Years technology" },
     { k: "7+", v: "Years blockchain" },
-    { k: "RWA · DeFi", v: "Tokenization" },
-    { k: "EVM · Solana", v: "Multi-chain" },
-    { k: "SME", v: "Technical leadership" },
+    { k: "EVM + Solana", v: "Ecosystems" },
+    { k: "Architecture → Production", v: "End-to-end delivery" },
+    { k: "RWA · DeFi", v: "Multi-chain" },
   ],
   subline:
     "Building secure token infrastructure, RWA protocols, DeFi systems and blockchain-powered ecosystems across EVM and Solana.",
@@ -30,7 +31,7 @@ export const profile = {
   resume: "/Sunanda_Vempati_Resume.pdf",
 } as const;
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sunandavempati.com";
 
 export const nav = [
   { href: "/", label: "Home" },

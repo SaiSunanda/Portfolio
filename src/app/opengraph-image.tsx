@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Sunanda Vempati — Blockchain Architect · Smart Contract Architect · Web3 Technical Lead";
+export const alt = "Sunanda Vempati — Blockchain Architect | Web3 Technical Lead";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const flow = ["RWA", "DEFI", "TOKEN INFRASTRUCTURE", "MULTI-CHAIN", "EVM + SOLANA"];
+const flow = ["REQUIREMENTS", "TRUST MODEL", "ARCHITECTURE", "SECURITY", "PRODUCTION"];
 
 // Architecture-styled share card: name, positioning and a system flow on a grid.
 export default function OpengraphImage() {
@@ -49,8 +49,8 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 84, fontWeight: 800, letterSpacing: -2 }}>SUNANDA VEMPATI</div>
-          <div style={{ fontSize: 31, color: "#22D3EE" }}>
-            Blockchain Architect · Smart Contract Architect · Web3 Technical Lead
+          <div style={{ fontSize: 38, color: "#22D3EE" }}>
+            Blockchain Architect | Web3 Technical Lead
           </div>
         </div>
 

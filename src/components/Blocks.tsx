@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
-import { blueprints, decisions, domains, securityLifecycle, securityPractices, securityTools } from "@/content/architecture";
+import { blueprints } from "@/content/architecture";
 import type { CaseStudy } from "@/content/caseStudies";
 import { blockchainRoles, currentRole, infosysAward, journey } from "@/content/experience";
 import { caseStudies } from "@/content/caseStudies";
 import { leadershipFormula, leadershipModel, pillars } from "@/content/leadership";
-import { currentLearning, education, profile, skills, snapshot } from "@/content/profile";
+import { currentLearning, education, profile, skills } from "@/content/profile";
 import { LayerDiagram, Flow } from "./Diagram";
 import { ArrowRight, Award, Download, GitHub, Handshake, Layers, LinkedIn, Mail, Route, Shield, Users } from "./Icons";
 
@@ -40,10 +40,6 @@ export function LeadershipPillars({ compact = false }: { compact?: boolean }) {
       })}
     </div>
   );
-}
-
-export function LeadershipFlow() {
-  return <Flow steps={leadershipModel.map((s) => s.step)} label="How I lead: from business requirement to continuous improvement" />;
 }
 
 export function LeadershipProcess() {
@@ -156,7 +152,7 @@ export function CaseStudyCard({ cs }: { cs: CaseStudy }) {
 export function Blueprints({ compact = false }: { compact?: boolean }) {
   return (
     <div className="grid-2">
-      {blueprints.map((b) => (
+      {blueprints.filter((b) => b.id !== "crosschain").map((b) => (
         <article key={b.id} id={b.id} className={`card blueprint${b.wide ? " blueprint-wide" : ""}`}>
           <div className="blueprint-head">
             <h3>{b.title}</h3>
@@ -178,58 +174,6 @@ export function Blueprints({ compact = false }: { compact?: boolean }) {
           )}
         </article>
       ))}
-    </div>
-  );
-}
-
-export function Decisions({ limit }: { limit?: number }) {
-  const list = limit ? decisions.slice(0, limit) : decisions;
-  return (
-    <div className="grid-2">
-      {list.map((d, i) => (
-        <article key={d.id} id={`decision-${d.id}`} className="card decision">
-          <span className="q">ADR-{String(i + 1).padStart(2, "0")}</span>
-          <h3>{d.question}</h3>
-          <p className="muted">{d.context}</p>
-          <ul className="bullets">
-            {d.considerations.map((c) => <li key={c}>{c}</li>)}
-          </ul>
-          <div className="tradeoff"><b>Trade-off</b>{d.tradeoff}</div>
-          <span className="applied">Applied in: {d.appliedIn}</span>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-export function SecurityByDesign() {
-  return (
-    <div className="stack-20">
-      <ol className="lifecycle" aria-label="Security lifecycle">
-        {securityLifecycle.map((s, i) => (
-          <li key={s} className={i === 1 || i === 5 || i === 8 ? "shield" : undefined}>{s}</li>
-        ))}
-      </ol>
-      <div className="grid-2 mt-24">
-        <div className="card stack-20">
-          <h3 style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <Shield width={20} height={20} style={{ color: "var(--success)" }} /> Tooling
-          </h3>
-          {securityTools.map((t) => (
-            <div key={t.name} className="tool"><b>{t.name}</b><span>{t.role}</span></div>
-          ))}
-        </div>
-        <div className="card stack-20">
-          <h3>Practice</h3>
-          <ul className="checklist">
-            {securityPractices.map((p) => <li key={p}>{p}</li>)}
-          </ul>
-          <p className="muted" style={{ fontSize: 14 }}>
-            Security is treated as a property of the whole lifecycle — from threat modeling during architecture to
-            verification after deployment — rather than a single audit at the end.
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
@@ -379,196 +323,8 @@ export function ContactBlock({ as = "h2" }: { as?: "h1" | "h2" }) {
 
 /* ---------- Recruiter-focused homepage blocks ---------- */
 
-export function WhatIBuild() {
-  return (
-    <div className="grid-2 build-grid">
-      {domains.map((d) => (
-        <article key={d.n} className="card build reveal">
-          <div className="build-head">
-            <span className="build-n">{d.n}</span>
-            <h3>{d.title}</h3>
-          </div>
-          <Flow steps={d.flow} label={`${d.title} flow`} />
-          <p>{d.body}</p>
-          <Link className="text-link" href={d.proof.href}>
-            Proof: {d.proof.label} <ArrowRight />
-          </Link>
-        </article>
-      ))}
-    </div>
-  );
-}
-
 const cs = (slug: string) => caseStudies.find((c) => c.slug === slug)!;
 const role = (id: string) => blockchainRoles.find((r) => r.id === id)!;
-
-export function FeaturedSystems() {
-  const rbc = cs("rbc-frk");
-  const usdao = cs("usdao");
-  const gov = cs("real-governance");
-  const maav = cs("maavatar");
-  const items = [
-    {
-      n: "01",
-      badge: "AppMindsGlobal",
-      role: currentRole.title,
-      title: rbc.title,
-      subtitle: rbc.subtitle,
-      body: rbc.summary,
-      groups: [
-        {
-          label: "Highlights",
-          items: [
-            "Token deployment",
-            "CREATE2 deterministic deployments",
-            "Multi-chain EVM infrastructure",
-            "LayerZero OFT-oriented cross-chain architecture",
-            "Deployment automation",
-            "Contract verification",
-            "Audit handoff",
-            "EVM / Solana-oriented design",
-          ],
-        },
-      ],
-      diagram: rbc,
-      links: [{ href: `/case-studies/${rbc.slug}`, label: "Explore architecture" }],
-    },
-    {
-      n: "02",
-      badge: "G Future Tech",
-      role: role("gft-lead").title,
-      title: "REAL Governance + USDAO",
-      subtitle: "Crypto-backed + RWA-backed Financial Infrastructure",
-      body:
-        "Financial and governance blockchain infrastructure spanning crypto-backed and real-world-asset-backed models — from stablecoin and lending protocols to on-chain governance.",
-      groups: [
-        {
-          label: "USDAO",
-          items: [
-            "Crypto-backed and RWA-backed models",
-            "Stablecoin infrastructure and collateralization",
-            "Lending, borrowing and liquidity",
-            "Oracle integration",
-            "Liquidation and recovery mechanisms",
-          ],
-        },
-        {
-          label: "REAL Governance",
-          items: [
-            "Governance infrastructure and mechanisms",
-            "Protocol logic and on-chain execution",
-            "Smart contracts, testing and security",
-            "Deployment",
-          ],
-        },
-      ],
-      diagram: usdao,
-      links: [
-        { href: `/case-studies/${usdao.slug}`, label: "Explore USDAO architecture" },
-        { href: `/case-studies/${gov.slug}`, label: "Explore REAL Governance" },
-      ],
-    },
-    {
-      n: "03",
-      badge: "Maavatar",
-      role: role("maavatar").title,
-      title: "Maavatar",
-      subtitle: "Blockchain-powered Metaverse Ecosystem",
-      body:
-        "A blockchain-backed metaverse where blockchain infrastructure supported digital identity, assets, ownership and on-chain interactions — contributed to as Blockchain SME and smart-contract developer.",
-      groups: [
-        {
-          label: "Highlights",
-          items: [
-            "Blockchain SME and technical direction",
-            "Solidity, ERC-1155 and dynamic NFTs",
-            "Mutable metadata and evolving digital identity",
-            "NFT ownership, tiers and digital assets",
-            "Wallet, Web3 and application integration",
-            "DAO / DeFi interoperability",
-          ],
-        },
-      ],
-      diagram: maav,
-      links: [{ href: `/case-studies/${maav.slug}`, label: "Explore architecture" }],
-    },
-  ];
-
-  return (
-    <div className="featured">
-      {items.map((f) => (
-        <article key={f.n} className="feature reveal">
-          <div className="feature-body">
-            <div className="feature-meta">
-              <span className="feature-n">{f.n}</span>
-              <span className="badge">{f.badge}</span>
-              <span className="feature-role">{f.role}</span>
-            </div>
-            <div>
-              <h3>{f.title}</h3>
-              <div className="role-title mt-8">{f.subtitle}</div>
-            </div>
-            <p className="muted">{f.body}</p>
-            <div className={f.groups.length > 1 ? "feature-groups two" : "feature-groups"}>
-              {f.groups.map((g) => (
-                <div key={g.label}>
-                  <span className="evidence-label">{g.label}</span>
-                  <ul className="checklist mt-8">
-                    {g.items.map((i) => <li key={i}>{i}</li>)}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <div className="btn-row">
-              {f.links.map((l, i) => (
-                <Link key={l.href} href={l.href} className={`btn${i === 0 ? " btn-primary" : ""}`}>
-                  {l.label} <ArrowRight />
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="feature-visual">
-            <LayerDiagram layers={f.diagram.diagram} label={f.diagram.diagramLabel} />
-          </div>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-export function RecruiterSnapshot() {
-  return (
-    <div className="snapshot reveal">
-      <dl className="snapshot-grid">
-        {snapshot.map((r) => (
-          <div key={r.k}>
-            <dt>{r.k}</dt>
-            <dd>{r.v}</dd>
-          </div>
-        ))}
-      </dl>
-      <div className="snapshot-cta">
-        <a className="btn btn-primary" href={profile.resume} download><Download /> Download resume</a>
-        <a className="btn" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><LinkedIn /> LinkedIn</a>
-        <a className="btn" href={`mailto:${profile.email}`}><Mail /> Email</a>
-      </div>
-    </div>
-  );
-}
-
-export function DecisionCards() {
-  return (
-    <div className="grid-3">
-      {decisions.filter((d) => d.featured).map((d) => (
-        <Link key={d.id} href={`/architecture#decision-${d.id}`} className="card card-link decision-card reveal">
-          <h3>{d.question}</h3>
-          <p>{d.summary}</p>
-          <span className="applied">{d.appliedIn}</span>
-        </Link>
-      ))}
-    </div>
-  );
-}
 
 export function ExperienceSummary() {
   const roles = [

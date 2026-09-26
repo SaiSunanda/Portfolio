@@ -7,9 +7,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { profile, siteUrl } from "@/content/profile";
 import "./globals.css";
 
-const title = "Sunanda Vempati | Blockchain Architect · Smart Contract Architect · Web3 Technical Lead";
+const title = "Sunanda Vempati | Blockchain Architect · Web3 Technical Lead";
 const description =
-  "Blockchain Engineer, Smart Contract Architect and Web3 Consultant specializing in RWA, DeFi, token infrastructure, cross-chain systems, EVM and Solana.";
+  "Blockchain Architect and Web3 Technical Lead designing secure RWA, DeFi and multi-chain token infrastructure — ERC-3643, smart contract architecture, EVM and Solana.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -18,20 +18,19 @@ export const metadata: Metadata = {
   applicationName: "Sunanda Vempati — Portfolio",
   authors: [{ name: profile.name, url: profile.linkedin }],
   keywords: [
+    "Sunanda Vempati",
     "Blockchain Architect",
+    "Web3 Technical Lead",
     "Smart Contract Architect",
     "Blockchain Technical Lead",
-    "Web3 Technical Lead",
-    "Blockchain Solutions Architect",
-    "Web3 Consultant",
-    "RWA Architect",
-    "DeFi Architect",
-    "Solidity Developer",
-    "Smart Contract Engineer",
+    "RWA Architecture",
+    "DeFi Architecture",
+    "Multi-Chain Architecture",
+    "Tokenization",
+    "ERC-3643",
+    "Solidity",
     "EVM",
     "Solana",
-    "Tokenization",
-    "Blockchain Infrastructure",
   ],
   alternates: { canonical: "/" },
   openGraph: {
