@@ -1,5 +1,5 @@
 // Single source of truth for identity, contact and positioning copy.
-// Every factual claim on the site should trace back to the resume in /public.
+// Every factual claim on the site should trace back to the resume in /resume.
 
 export const profile = {
   name: "Sunanda Vempati",

@@ -22,7 +22,7 @@ All copy lives in `src/content/` — components never hard-code claims.
 
 Adding a case study = adding an object to `caseStudies` — the route, sitemap entry and cards are generated.
 
-The downloadable resume is `public/Sunanda_Vempati_Resume.pdf`; replace the file to update it.
+The downloadable resume lives in `resume/` (`Sunanda_Vempati_Resume.docx` and `.pdf`). To update it, edit the `.docx`, export it to `resume/Sunanda_Vempati_Resume.pdf`, and commit both — `npm run dev` and `npm run build` copy the PDF into `public/` automatically (`npm run sync-resume` does it on demand).
 
 ## Deployment
 
