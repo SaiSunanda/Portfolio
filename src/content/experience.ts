@@ -18,7 +18,7 @@ export const currentRole: Role & { focus: string[] } = {
   id: "appmindsglobal",
   company: "AppMindsGlobal",
   title: "Blockchain Consultant",
-  when: "May 2026 – Present",
+  when: "Freelancer May 2026 – Present",
   current: true,
   kind: "blockchain",
   story: "Multi-chain token infrastructure + technical consulting",
@@ -52,11 +52,11 @@ export const currentRole: Role & { focus: string[] } = {
 };
 
 export const blockchainRoles: Role[] = [
-  {
+   {
     id: "gft-lead",
     company: "G Future Tech",
     title: "SME / Lead Blockchain Developer",
-    when: "Oct 2024 – Jul 2026",
+    when: "Consultant Freelancer Jan 2026 - Apr 2026",
     kind: "blockchain",
     story: "Blockchain financial infrastructure · DeFi · RWA · crypto-backed systems · governance · protocol development",
     summary:
@@ -84,8 +84,8 @@ export const blockchainRoles: Role[] = [
   {
     id: "maavatar",
     company: "Maavatar",
-    title: "Smart Contract Manager / Blockchain SME (Consultant)",
-    when: "Dec 2024 – Feb 2026",
+    title: "Smart Contract / Web3 Manager / Blockchain SME",
+    when: "Dec 2024 – Jan 2026",
     kind: "blockchain",
     story: "Blockchain SME · blockchain-backed metaverse · digital identity · NFTs · Web3 ecosystem",
     summary:
